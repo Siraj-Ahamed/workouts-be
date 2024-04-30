@@ -4,11 +4,12 @@ const app = express();
 
 const dotenv = require("dotenv");
 dotenv.config();
+const cors = require("cors");
+app.use(cors());
 const mongoose = require("mongoose");
 const workoutRoutes = require("./routes/workouts");
 const userRoutes = require("./routes/user");
 const PORT = process.env.PORT || 8000;
-
 
 // middlewares
 app.use(express.json());
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 app.use("/api/workouts", workoutRoutes);
 app.use("/api/user", userRoutes);
 
+console.log("MONGO_URI:", process.env.MONGO_URI);
 // connect to db
 mongoose
     .connect(process.env.MONGO_URI)
