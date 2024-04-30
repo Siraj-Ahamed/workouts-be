@@ -3,11 +3,12 @@ const express = require("express");
 const app = express();
 
 const dotenv = require("dotenv");
+dotenv.config();
 const mongoose = require("mongoose");
 const workoutRoutes = require("./routes/workouts");
 const userRoutes = require("./routes/user");
 const PORT = process.env.PORT || 8000;
-dotenv.config();
+
 
 // middlewares
 app.use(express.json());
@@ -34,5 +35,6 @@ mongoose
         });
     })
     .catch((error) => {
-        console.log(error);
+        console.error("Error connecting to MongoDB:", error.message);
+        process.exit(1); // Terminate the application
     });
