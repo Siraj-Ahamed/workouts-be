@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const workoutRoutes = require("./routes/workouts");
 const userRoutes = require("./routes/user");
-
+const PORT = process.env.PORT || 8000;
 dotenv.config();
 
 // middlewares
@@ -29,10 +29,8 @@ mongoose
     .connect(process.env.MONGO_URI)
     .then(() => {
         // lisren for requests
-        app.listen(process.env.PORT, () => {
-            console.log(
-                `connectes to db & listening on port ${process.env.PORT}`
-            );
+        app.listen(PORT, () => {
+            console.log(`connectes to db & listening on port ${PORT}`);
         });
     })
     .catch((error) => {
